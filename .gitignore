@@ -21,7 +21,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/web/
 /pubspec.lock
 
 # Symbolication related
