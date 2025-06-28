@@ -1,4 +1,4 @@
-name: Build and Push Docker Image to GHCR
+name: Build and deploy
 
 on:
   push:
@@ -40,5 +40,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.DEPLOY_BIO_TOKEN }}
-          repository: your-org/your-deploy-repo
+          repository: kiria-f/host-setup
           event-type: bio
