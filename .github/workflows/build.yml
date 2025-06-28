@@ -8,7 +8,7 @@ env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
 
     permissions:
@@ -31,3 +31,14 @@ jobs:
 
       - name: Push image to GHCR
         run: docker push $IMAGE_NAME:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.DEPLOY_BIO_TOKEN }}
+          repository: your-org/your-deploy-repo
+          event-type: bio
