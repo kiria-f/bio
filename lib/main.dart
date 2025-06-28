@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
           spacing: 20,
           children: [
             FKButton(
-              label: 'Hello, Flutter!',
+              label: 'Do not press',
               onPressed: (event) => setState(() {
                 counter++;
               }),
