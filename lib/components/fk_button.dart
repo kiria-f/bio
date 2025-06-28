@@ -80,14 +80,14 @@ class _FKButtonState extends State<FKButton>
                 borderRadius: BorderRadius.circular(1000),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.from(
-                      alpha: 0.5,
+                    color: Color.from(
+                      alpha: 0.5 + (1 - elevation.value) / 2,
                       red: 0,
                       green: 0,
                       blue: 0,
                     ),
                     blurRadius: 3 * elevation.value,
-                    spreadRadius: 0,
+                    spreadRadius: 0 - (1 - elevation.value) * 1,
                     offset: Offset(0, 3 * elevation.value),
                   ),
                 ],
