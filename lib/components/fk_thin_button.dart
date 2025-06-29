@@ -2,17 +2,18 @@ import 'package:bio/constants/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-class FKButton extends StatefulWidget {
+class FKThinButton extends StatefulWidget {
   final String label;
   final PointerDownEventListener? onPressed;
 
-  const FKButton({super.key, this.label = '', this.onPressed});
+  const FKThinButton({super.key, this.label = '', this.onPressed});
 
   @override
-  State<FKButton> createState() => _FKButtonState();
+  State<FKThinButton> createState() => _FKThinButtonState();
 }
 
-class _FKButtonState extends State<FKButton> with TickerProviderStateMixin {
+class _FKThinButtonState extends State<FKThinButton>
+    with TickerProviderStateMixin {
   late final AnimationController elevationController;
   late final Animation<double> elevationTween;
   late final AnimationController dimController;

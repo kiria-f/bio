@@ -1,4 +1,4 @@
-import 'package:bio/components/fk_button.dart';
+import 'package:bio/components/fk_thin_button.dart';
 import 'package:bio/components/fk_text.dart';
 import 'package:flutter/widgets.dart';
 
@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 20,
           children: [
-            FKButton(
+            FKThinButton(
               label: 'Do not press',
               onPressed: (event) => setState(() {
                 counter++;
