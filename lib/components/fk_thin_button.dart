@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bio/constants/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -30,7 +32,7 @@ class _FKThinButtonState extends State<FKThinButton>
       end: 0,
     ).animate(elevationController);
     dimController = AnimationController(vsync: this);
-    dimTween = Tween<double>(begin: 1, end: 0).animate(dimController);
+    dimTween = Tween<double>(begin: 0, end: 1).animate(dimController);
     pressed = false;
     hovered = false;
   }
@@ -123,7 +125,21 @@ class _FKThinButtonState extends State<FKThinButton>
                 builder: (context, internalChild) {
                   return Container(
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.from(
+                        alpha: 1,
+                        red:
+                            1 -
+                            (max(1 - elevationTween.value, dimTween.value)) /
+                                50,
+                        green:
+                            1 -
+                            (max(1 - elevationTween.value, dimTween.value)) /
+                                50,
+                        blue:
+                            1 -
+                            (max(1 - elevationTween.value, dimTween.value)) /
+                                50,
+                      ),
                       borderRadius: BorderRadius.circular(1000),
                       boxShadow: [
                         BoxShadow(

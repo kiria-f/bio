@@ -20,19 +20,22 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 20,
-          children: [
-            FKThinButton(
-              label: 'Do not press',
-              onPressed: (event) => setState(() {
-                counter++;
-              }),
-            ),
-            FKText(text: counter.toString()),
-          ],
+      child: Container(
+        color: const Color.from(alpha: 1, red: 0.98, green: 0.98, blue: 0.98),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 20,
+            children: [
+              FKThinButton(
+                label: 'Do not press',
+                onPressed: (event) => setState(() {
+                  counter++;
+                }),
+              ),
+              FKText(text: counter.toString()),
+            ],
+          ),
         ),
       ),
     );
