@@ -10,6 +10,6 @@ COPY lib/ lib/
 RUN flutter build web
 
 
-FROM nginx:alpine AS run
+FROM nginx:alpine
 
 COPY --from=build /app/build/web /usr/share/nginx/html
