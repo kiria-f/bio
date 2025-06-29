@@ -123,12 +123,7 @@ class _FKThinButtonState extends State<FKThinButton>
                 builder: (context, internalChild) {
                   return Container(
                     decoration: BoxDecoration(
-                      color: Color.from(
-                        alpha: 1,
-                        red: 1 - (1 - dimTween.value) / 100,
-                        green: 1 - (1 - dimTween.value) / 100,
-                        blue: 1 - (1 - dimTween.value) / 100,
-                      ),
+                      color: Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(1000),
                       boxShadow: [
                         BoxShadow(
