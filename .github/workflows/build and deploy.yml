@@ -26,11 +26,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get timestamp
+        run: echo "TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
+
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME:latest .
+        run: >-
+          docker build
+          -t $IMAGE_NAME:$TIMESTAMP
+          -t $IMAGE_NAME:latest
+          .
 
       - name: Push image to GHCR
-        run: docker push $IMAGE_NAME:latest
+        run: |
+          docker push $IMAGE_NAME:$TIMESTAMP
+          docker push $IMAGE_NAME:latest
 
   deploy:
     needs: build
@@ -41,4 +50,9 @@ jobs:
         with:
           token: ${{ secrets.DEPLOY_BIO_TOKEN }}
           repository: kiria-f/host-setup
-          event-type: bio
+          event-type: Deploy a single role
+          client-payload: >-
+            {
+              "role": "bio",
+              "image_tag":"${{ env.TIMESTAMP }}"
+            }
