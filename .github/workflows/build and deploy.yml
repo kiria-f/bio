@@ -44,5 +44,5 @@ jobs:
           event-type: Deploy a single role
           client-payload: >-
             {
-              "role": "bio",
+              "role": "bio"
             }
