@@ -34,7 +34,50 @@
   <link rel="manifest" href="manifest.json">
 </head>
 
-<body>
+<body style="background: #fafafa;">
+  <div id="loading-screen" style="
+    position: fixed; /* или absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  ">
+    <div style="
+      width: 5%;
+      height: 5%;
+    ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <circle fill="#DCDCDC" stroke="#DCDCDC" stroke-width="15" r="15" cx="40" cy="65">
+          <animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1"
+            repeatCount="indefinite" begin="-.4"></animate>
+        </circle>
+        <circle fill="#DCDCDC" stroke="#DCDCDC" stroke-width="15" r="15" cx="100" cy="65">
+          <animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1"
+            repeatCount="indefinite" begin="-.2"></animate>
+        </circle>
+        <circle fill="#DCDCDC" stroke="#DCDCDC" stroke-width="15" r="15" cx="160" cy="65">
+          <animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1"
+            repeatCount="indefinite" begin="0"></animate>
+        </circle>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', function () {
+      var loadingScreen = document.getElementById('loading-screen');
+      loadingScreen.style.opacity = '0';
+      setTimeout(function () {
+        loadingScreen.style.display = 'none';
+      }, 500);
+    });
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
