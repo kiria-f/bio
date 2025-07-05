@@ -1,0 +1,95 @@
+name: Configure Ansible user
+
+on:
+  workflow_dispatch:
+    inputs:
+      remote_host:
+        description: 'Remote server hostname/IP'
+        required: true
+      remote_user:
+        description: 'SSH username (with password auth)'
+        required: true
+      ssh_password:
+        description: 'SSH password'
+        required: true
+        type: password
+      ansible_ssh_public_key:
+        description: 'Ansible SSH public key'
+        required: true
+
+jobs:
+  configure-host:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install sshpass
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y sshpass
+
+    - name: Configure remote host
+      env:
+        REMOTE_HOST: ${{ github.event.inputs.remote_host }}
+        REMOTE_USER: ${{ github.event.inputs.remote_user }}
+        SSH_PASSWORD: ${{ github.event.inputs.ssh_password }}
+        ANSIBLE_SSH_PUBLIC_KEY: ${{ github.event.inputs.ansible_ssh_public_key }}
+      run: |
+        # Install expect for automated password auth
+        sudo apt-get install -y expect
+
+        # Create expect script for SSH commands
+        cat > remote_setup.exp << 'EOF'
+        #!/usr/bin/expect -f
+        set remote_host [lindex $argv 0]
+        set remote_user [lindex $argv 1]
+        set ssh_password [lindex $argv 2]
+        set ansible_ssh_public_key [lindex $argv 3]
+
+        set timeout 30
+        spawn ssh $remote_user@$remote_host
+
+        expect {
+          "*yes/no*" { 
+            send "yes\r"
+            exp_continue
+          }
+          "*password:*" {
+            send "$ssh_password\r"
+          }
+        }
+
+        expect -re "\\$ $"
+        
+        # Commands to execute on remote host
+        send "sudo useradd -m ansible\r"
+        expect "*password*"
+        send "$ssh_password\r"
+        expect -re "\\$ $"
+
+        send "echo 'ansible ALL=(root) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/ansible\r"
+        expect -re "\\$ $"
+
+        send "sudo mkdir -p /home/ansible/.ssh\r"
+        expect -re "\\$ $"
+
+        send "echo '$ansible_ssh_public_key' | sudo tee /home/ansible/.ssh/authorized_keys\r"
+        expect -re "\\$ $"
+
+        send "sudo chown -R ansible:ansible /home/ansible/.ssh\r"
+        expect -re "\\$ $"
+
+        send "sudo chmod 700 /home/ansible/.ssh\r"
+        expect -re "\\$ $"
+
+        send "sudo chmod 600 /home/ansible/.ssh/authorized_keys\r"
+        expect -re "\\$ $"
+
+        send "exit\r"
+        expect eof
+        EOF
+
+        # Make the script executable and run it
+        chmod +x remote_setup.exp
+        ./remote_setup.exp "$REMOTE_HOST" "$REMOTE_USER" "$SSH_PASSWORD" "$ANSIBLE_SSH_PUBLIC_KEY"
