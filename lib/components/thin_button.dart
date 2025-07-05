@@ -4,18 +4,17 @@ import 'package:bio/constants/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-class FKThinButton extends StatefulWidget {
+class FThinButton extends StatefulWidget {
   final String label;
   final PointerDownEventListener? onPressed;
 
-  const FKThinButton({super.key, this.label = '', this.onPressed});
+  const FThinButton({super.key, this.label = '', this.onPressed});
 
   @override
-  State<FKThinButton> createState() => _FKThinButtonState();
+  State<FThinButton> createState() => _FThinButtonState();
 }
 
-class _FKThinButtonState extends State<FKThinButton>
-    with TickerProviderStateMixin {
+class _FThinButtonState extends State<FThinButton> with TickerProviderStateMixin {
   late final AnimationController elevationController;
   late final Animation<double> elevationTween;
   late final AnimationController dimController;
@@ -27,10 +26,7 @@ class _FKThinButtonState extends State<FKThinButton>
   void initState() {
     super.initState();
     elevationController = AnimationController(vsync: this);
-    elevationTween = Tween<double>(
-      begin: 1,
-      end: 0,
-    ).animate(elevationController);
+    elevationTween = Tween<double>(begin: 1, end: 0).animate(elevationController);
     dimController = AnimationController(vsync: this);
     dimTween = Tween<double>(begin: 0, end: 1).animate(dimController);
     pressed = false;
@@ -47,34 +43,19 @@ class _FKThinButtonState extends State<FKThinButton>
   }
 
   TickerFuture animatePress() {
-    return elevationController.animateTo(
-      1,
-      duration: const Duration(milliseconds: 50),
-    );
+    return elevationController.animateTo(1, duration: const Duration(milliseconds: 50));
   }
 
   TickerFuture animateRelease() {
-    return elevationController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOutQuad,
-    );
+    return elevationController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutQuad);
   }
 
   TickerFuture animateEnter() {
-    return dimController.animateTo(
-      1,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-    );
+    return dimController.animateTo(1, duration: const Duration(milliseconds: 100), curve: Curves.linear);
   }
 
   TickerFuture animateExit() {
-    return dimController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-    );
+    return dimController.animateTo(0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
   }
 
   void onPointerDown(PointerDownEvent event) async {
@@ -127,28 +108,14 @@ class _FKThinButtonState extends State<FKThinButton>
                     decoration: BoxDecoration(
                       color: Color.from(
                         alpha: 1,
-                        red:
-                            1 -
-                            (max(1 - elevationTween.value, dimTween.value)) /
-                                50,
-                        green:
-                            1 -
-                            (max(1 - elevationTween.value, dimTween.value)) /
-                                50,
-                        blue:
-                            1 -
-                            (max(1 - elevationTween.value, dimTween.value)) /
-                                50,
+                        red: 1 - (max(1 - elevationTween.value, dimTween.value)) / 50,
+                        green: 1 - (max(1 - elevationTween.value, dimTween.value)) / 50,
+                        blue: 1 - (max(1 - elevationTween.value, dimTween.value)) / 50,
                       ),
                       borderRadius: BorderRadius.circular(1000),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.from(
-                            alpha: 0.5 + (1 - elevationTween.value) / 2,
-                            red: 0,
-                            green: 0,
-                            blue: 0,
-                          ),
+                          color: Color.from(alpha: 0.5 + (1 - elevationTween.value) / 2, red: 0, green: 0, blue: 0),
                           blurRadius: 3 * elevationTween.value,
                           spreadRadius: 0 - (1 - elevationTween.value) * 1,
                           offset: Offset(0, 3 * elevationTween.value),
@@ -167,7 +134,7 @@ class _FKThinButtonState extends State<FKThinButton>
               widget.label,
               style: TextStyle(
                 fontFamily: 'Source Code Pro',
-                fontSize: Constants.sizes.font.normal,
+                fontSize: Constants.normalFontSize,
                 fontWeight: FontWeight.w800,
                 color: const Color.fromARGB(255, 0, 0, 0),
               ),

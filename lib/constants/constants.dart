@@ -1,5 +1,8 @@
-import 'package:bio/constants/sizes.dart';
+import 'package:flutter/widgets.dart';
 
-class Constants {
-  static final Sizes sizes = Sizes();
+final class Constants {
+  static const double radius = 25;
+  static const double buttonDefaultHeight = radius * 2;
+  static const double normalFontSize = 14;
+  static const Color backgroundColor = Color.from(alpha: 1, red: 0.98, green: 0.98, blue: 0.98);
 }

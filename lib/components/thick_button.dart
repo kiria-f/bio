@@ -2,18 +2,17 @@ import 'package:bio/constants/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-class FKThickButton extends StatefulWidget {
+class FThickButton extends StatefulWidget {
   final String label;
   final PointerDownEventListener? onPressed;
 
-  const FKThickButton({super.key, this.label = '', this.onPressed});
+  const FThickButton({super.key, this.label = '', this.onPressed});
 
   @override
-  State<FKThickButton> createState() => _FKThickButtonState();
+  State<FThickButton> createState() => _FThickButtonState();
 }
 
-class _FKThickButtonState extends State<FKThickButton>
-    with TickerProviderStateMixin {
+class _FThickButtonState extends State<FThickButton> with TickerProviderStateMixin {
   late final AnimationController elevationController;
   late final Animation<double> elevationTween;
   late final AnimationController dimController;
@@ -25,10 +24,7 @@ class _FKThickButtonState extends State<FKThickButton>
   void initState() {
     super.initState();
     elevationController = AnimationController(vsync: this);
-    elevationTween = Tween<double>(
-      begin: 1,
-      end: 0,
-    ).animate(elevationController);
+    elevationTween = Tween<double>(begin: 1, end: 0).animate(elevationController);
     dimController = AnimationController(vsync: this);
     dimTween = Tween<double>(begin: 1, end: 0).animate(dimController);
     pressed = false;
@@ -45,34 +41,19 @@ class _FKThickButtonState extends State<FKThickButton>
   }
 
   TickerFuture animatePress() {
-    return elevationController.animateTo(
-      1,
-      duration: const Duration(milliseconds: 50),
-    );
+    return elevationController.animateTo(1, duration: const Duration(milliseconds: 50));
   }
 
   TickerFuture animateRelease() {
-    return elevationController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOutQuad,
-    );
+    return elevationController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOutQuad);
   }
 
   TickerFuture animateEnter() {
-    return dimController.animateTo(
-      1,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-    );
+    return dimController.animateTo(1, duration: const Duration(milliseconds: 100), curve: Curves.linear);
   }
 
   TickerFuture animateExit() {
-    return dimController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-    );
+    return dimController.animateTo(0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
   }
 
   void onPointerDown(PointerDownEvent event) async {
@@ -149,12 +130,8 @@ class _FKThickButtonState extends State<FKThickButton>
                                     blue: 0,
                                   ),
                                   blurRadius: 2 + 4 * elevationTween.value,
-                                  spreadRadius:
-                                      -1 - (1 - elevationTween.value) * 1,
-                                  offset: Offset(
-                                    0,
-                                    2 + 4 * elevationTween.value,
-                                  ),
+                                  spreadRadius: -1 - (1 - elevationTween.value) * 1,
+                                  offset: Offset(0, 2 + 4 * elevationTween.value),
                                 ),
                               ],
                             ),
@@ -183,7 +160,7 @@ class _FKThickButtonState extends State<FKThickButton>
               widget.label,
               style: TextStyle(
                 fontFamily: 'Source Code Pro',
-                fontSize: Constants.sizes.font.normal,
+                fontSize: Constants.normalFontSize,
                 fontWeight: FontWeight.w800,
                 color: const Color.fromARGB(255, 0, 0, 0),
               ),
