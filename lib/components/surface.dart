@@ -36,7 +36,7 @@ class FSurface extends Container {
             BoxShadow(
               color: Color.from(alpha: 0.5 + (1 - elevation) / 2, red: 0, green: 0, blue: 0),
               blurRadius: 3 * elevation,
-              spreadRadius: 0 - (1 - elevation) * 1,
+              spreadRadius: elevation - 1,
               offset: Offset(0, 3 * elevation),
             ),
           ],
