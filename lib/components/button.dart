@@ -102,12 +102,7 @@ class _FButtonState extends State<FButton> with TickerProviderStateMixin {
             return AnimatedBuilder(
               animation: hilightTween,
               builder: (context, internalChild) {
-                return FSurface(
-                  elevation: elevationTween.value,
-                  hilight: hilightTween.value,
-                  constraints: BoxConstraints(minHeight: Constants.buttonDefaultHeight),
-                  child: externalChild,
-                );
+                return FSurface(elevation: elevationTween.value, hilight: hilightTween.value, child: externalChild);
               },
             );
           },

@@ -28,6 +28,7 @@ class FSurface extends Container {
     return Transform.translate(
       offset: Offset(0, -3 * elevation),
       child: Container(
+        constraints: BoxConstraints(minHeight: Constants.radius * 2, minWidth: Constants.radius * 2),
         decoration: BoxDecoration(
           color: Color.lerp(Constants.backgroundColor, Constants.backgroundHilightColor, hilight),
           borderRadius: BorderRadius.circular(Constants.radius),
