@@ -18,8 +18,10 @@ class FSurface extends Container {
     super.child,
     super.clipBehavior = Clip.none,
     this.elevation = 1,
+    this.hilight = 0,
   }) : assert(elevation >= 0);
   final double elevation;
+  final double hilight;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class FSurface extends Container {
       offset: Offset(0, -3 * elevation),
       child: Container(
         decoration: BoxDecoration(
-          color: Constants.backgroundColor,
+          color: Color.lerp(Constants.backgroundColor, Constants.backgroundHilightColor, hilight),
           borderRadius: BorderRadius.circular(Constants.radius),
           boxShadow: [
             BoxShadow(

@@ -1,5 +1,4 @@
-import 'package:bio/components/surface.dart';
-import 'package:bio/components/thin_button.dart';
+import 'package:bio/components/button.dart';
 import 'package:bio/components/text.dart';
 import 'package:flutter/widgets.dart';
 
@@ -28,14 +27,13 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 20,
             children: [
-              FThinButton(
+              FButton(
                 label: 'Do not press',
                 onPressed: (event) => setState(() {
                   counter++;
                 }),
               ),
               FText(counter.toString()),
-              FSurface(width: 100, height: 100),
             ],
           ),
         ),
