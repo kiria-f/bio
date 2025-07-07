@@ -105,6 +105,7 @@ class _FThinButtonState extends State<FThinButton> with TickerProviderStateMixin
                 animation: dimTween,
                 builder: (context, internalChild) {
                   return Container(
+                    constraints: BoxConstraints(minHeight: Constants.buttonDefaultHeight),
                     decoration: BoxDecoration(
                       color: Color.from(
                         alpha: 1,
@@ -112,7 +113,7 @@ class _FThinButtonState extends State<FThinButton> with TickerProviderStateMixin
                         green: 1 - (max(1 - elevationTween.value, dimTween.value)) / 50,
                         blue: 1 - (max(1 - elevationTween.value, dimTween.value)) / 50,
                       ),
-                      borderRadius: BorderRadius.circular(1000),
+                      borderRadius: BorderRadius.circular(Constants.radius),
                       boxShadow: [
                         BoxShadow(
                           color: Color.from(alpha: 0.5 + (1 - elevationTween.value) / 2, red: 0, green: 0, blue: 0),
@@ -129,14 +130,18 @@ class _FThinButtonState extends State<FThinButton> with TickerProviderStateMixin
             );
           },
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Text(
-              widget.label,
-              style: TextStyle(
-                fontFamily: 'Source Code Pro',
-                fontSize: Constants.normalFontSize,
-                fontWeight: FontWeight.w800,
-                color: const Color.fromARGB(255, 0, 0, 0),
+            margin: EdgeInsets.symmetric(horizontal: Constants.radius),
+            child: IntrinsicWidth(
+              child: Center(
+                child: Text(
+                  widget.label,
+                  style: TextStyle(
+                    fontFamily: 'Source Code Pro',
+                    fontSize: Constants.normalFontSize,
+                    fontWeight: FontWeight.w800,
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
               ),
             ),
           ),
