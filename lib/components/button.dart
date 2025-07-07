@@ -107,7 +107,7 @@ class _FButtonState extends State<FButton> with TickerProviderStateMixin {
             );
           },
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: Constants.radius),
+            margin: EdgeInsets.symmetric(horizontal: Constants.radius * 4 / 3),
             child: IntrinsicWidth(child: Center(child: FText(widget.label))),
           ),
         ),
