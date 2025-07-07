@@ -1,5 +1,5 @@
-import 'package:bio/components/fk_thin_button.dart';
-import 'package:bio/components/fk_text.dart';
+import 'package:bio/components/button.dart';
+import 'package:bio/components/text.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
@@ -27,13 +27,13 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 20,
             children: [
-              FKThinButton(
+              FButton(
                 label: 'Do not press',
                 onPressed: (event) => setState(() {
                   counter++;
                 }),
               ),
-              FKText(text: counter.toString()),
+              FText(counter.toString()),
             ],
           ),
         ),
