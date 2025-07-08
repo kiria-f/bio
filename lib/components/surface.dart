@@ -6,8 +6,6 @@ class FSurface extends Container {
     super.key,
     super.alignment,
     super.padding,
-    super.color,
-    super.decoration,
     super.foregroundDecoration,
     super.width,
     super.height,
@@ -16,12 +14,13 @@ class FSurface extends Container {
     super.transform,
     super.transformAlignment,
     super.child,
-    super.clipBehavior = Clip.none,
     this.elevation = 1,
     this.hilight = 0,
+    this.round = false,
   }) : assert(elevation >= 0);
   final double elevation;
   final double hilight;
+  final bool round;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +28,10 @@ class FSurface extends Container {
       offset: Offset(0, -3 * elevation),
       child: Container(
         constraints: BoxConstraints(minHeight: Constants.radius * 2, minWidth: Constants.radius * 2),
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: Color.lerp(Constants.backgroundColor, Constants.backgroundHilightColor, hilight),
-          borderRadius: BorderRadius.circular(Constants.radius),
+          borderRadius: BorderRadius.circular(round ? 1000 : Constants.radius),
           boxShadow: [
             BoxShadow(
               color: Color.from(alpha: 0.5 + (1 - elevation) / 2, red: 0, green: 0, blue: 0),

@@ -1,20 +1,12 @@
-import 'package:bio/components/button.dart';
-import 'package:bio/components/text.dart';
+import 'package:bio/sections/head.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +14,8 @@ class _MyAppState extends State<MyApp> {
       textDirection: TextDirection.ltr,
       child: Container(
         color: const Color.from(alpha: 1, red: 0.98, green: 0.98, blue: 0.98),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 20,
-            children: [
-              FButton(
-                label: 'Do not press',
-                onPressed: (event) => setState(() {
-                  counter++;
-                }),
-              ),
-              FText(counter.toString()),
-            ],
-          ),
-        ),
+        padding: EdgeInsets.all(20),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [HeadSection()]),
       ),
     );
   }
